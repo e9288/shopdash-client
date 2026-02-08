@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useAuth } from "../shared/auth/AuthProvider";
+import styles from "./LoginPage.module.css";
 
 export default function LoginPage() {
     const {login, loading, user} = useAuth();
@@ -8,55 +9,90 @@ export default function LoginPage() {
     const [submitting, setSubmitting] = useState(false);
     const [error, setError] = useState<string | null>(null);
 
+    // 로그인 처리된 경우 Redirecting 화면 표시
     if(!loading && user) {
-        /* 로그인 처리된 경우 Redirecting... 노출, 상위 Provider가 /app/* 으로 실제 redirection 처리 */
-        return <div style={{padding: 24}}>Redirecting...</div>;
+        return (
+            <div className={styles.redirecting}>
+                <div className={styles.spinner}></div>
+                <div className={styles.redirectingText}>Redirecting to dashboard...</div>
+            </div>
+        );
     }
 
     async function onSubmit(e: React.FormEvent) {
-        e.preventDefault(); // 기본 동작 방지
+        e.preventDefault();
+
+        // 유효성 검사
+        if (!email.trim() || !password.trim()) {
+            setError("이메일과 비밀번호를 입력해주세요");
+            return;
+        }
+
         setSubmitting(true);
         setError(null);
 
         try {
             await login(email, password);
-        }catch (err: any) {
-            setError(err?.message ?? "login failed");
-        }finally {
+        } catch (err: any) {
+            setError(err?.message ?? "로그인에 실패했습니다. 다시 시도해주세요.");
+        } finally {
             setSubmitting(false);
         }
     }
 
     return (
-        <div style={{ maxWidth: 360, margin: "80px auto", padding: 24 }}>
-            <h1 style={{ fontSize: 20, marginBottom: 12 }}>ShopDash Login</h1>
+        <div className={styles.container}>
+            <div className={styles.card}>
+                <div className={styles.header}>
+                    <div className={styles.logo}>📊</div>
+                    <h1 className={styles.title}>ShopDash</h1>
+                    <p className={styles.subtitle}>쇼핑몰 통합 대시보드</p>
+                </div>
 
-            <form onSubmit={onSubmit} style={{ display: "flex", flexDirection: "column", gap: 10 }}>
-                <input
-                    placeholder="email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    autoComplete="email"
-                />
-                {/* 이메일 입력 */}
+                <form onSubmit={onSubmit} className={styles.form}>
+                    <div className={styles.inputGroup}>
+                        <label htmlFor="email" className={styles.label}>
+                            이메일
+                        </label>
+                        <input
+                            id="email"
+                            type="email"
+                            placeholder="your@email.com"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                            autoComplete="email"
+                            className={styles.input}
+                            disabled={submitting}
+                        />
+                    </div>
 
-                <input
-                    placeholder="password"
-                    type="password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    autoComplete="current-password"
-                />
-                {/* 비밀번호 입력 */}
+                    <div className={styles.inputGroup}>
+                        <label htmlFor="password" className={styles.label}>
+                            비밀번호
+                        </label>
+                        <input
+                            id="password"
+                            type="password"
+                            placeholder="••••••••"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                            autoComplete="current-password"
+                            className={styles.input}
+                            disabled={submitting}
+                        />
+                    </div>
 
-                <button disabled={submitting} type="submit">
-                    {submitting ? "Signing in..." : "Sign in"}
-                </button>
-                {/* 로그인 버튼 */}
+                    {error && <div className={styles.error}>{error}</div>}
 
-                {error && <div style={{ color: "crimson" }}>{error}</div>}
-                {/* 에러 표시 */}
-            </form>
+                    <button
+                        type="submit"
+                        disabled={submitting}
+                        className={styles.submitButton}
+                    >
+                        {submitting ? "로그인 중..." : "로그인"}
+                    </button>
+                </form>
+            </div>
         </div>
     );
 }

@@ -1,4 +1,4 @@
-const API_BASE = import.meta.env.META_API_BASE_URL;
+const API_BASE = import.meta.env.VITE_API_BASE_URL;
 
 export async function apiFetch(input: string, init: RequestInit = {}) {
     const res = await fetch(`${API_BASE}${input}`, {
