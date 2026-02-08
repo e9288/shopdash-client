@@ -1,0 +1,69 @@
+import { useEffect, useState } from "react";
+import { getSummary, type MetricsSummary, getTimeSeries, type MetricRow } from "./api/metrics";
+import RevenueChart from "./components/RevenueChart";
+
+export default function App() {
+  // API 성공 시 데이터 저장
+  const [data, setData] = useState<MetricsSummary | null>(null);
+  const [rows, setRows] = useState<MetricRow[]>([]);
+  // API 실패 시 데이터 저장
+  const [err, setErr] = useState<string | null>(null);
+/* ↑
+  useState<T>(initalValue) : <제네릭>(초기값)
+  초기값은 null, 추후 MetricsSummary, string 타입이 들어감을 명시한 내용
+  제네릭은 생략 가능하나, 임의 any로 추론된다. 타입을 명확히 선언하여 컴파일 시 엄격하게 검사하기 위함.
+
+  useState는 배열로 2가지 값을 반환한다.
+  1: 현재 상태값 변수(ex: data)
+  2: 상태를 바꾸는 함수(ex: setData)
+  배열 구조분해 할당(destructuring) 으로 변수에 값을 할당한다.
+*/
+
+  // 컴포넌트 첫 렌더링 시 동작(initEvent)
+  useEffect(() => {
+    getSummary()
+      .then(setData) // 성공 시 data 상태에 저장
+      .catch((e) => setErr(e?.message ?? "error")); // 실패 시 err 상태에 저장
+    
+    getTimeSeries()
+      .then(setRows)
+      .catch((e) => setErr(e?.message ?? "error"));
+  }, []); // [] => 최초 1회만 실행 옵션
+  /*
+    getSummary()는 async function으로 선언했기 때문에 Promise를 반환한다.
+    Promise가 성공(fulfilled) 했을 때 then(() => {})에 선언된 함수가 실행된다.
+    실패(rejected) 하면 catch((e) => {})에 선언된 함수가 실행된다.
+
+    useEffect는 렌더링 후 실행 되는데, 두번째 인자인 dependency array(의존성 배열)이 실행 조건을 결정한다.
+    두번째 인자를 생략할 시 state 변경=>렌더링=>useEffect=>state 변경=>렌더링=>... 무한 루프 동작의 위험이 있다.
+    빈 배열을 전달하면 의존하는 배열이 없으므로 첫 렌더링에만 useEffect를 실행하게 된다.
+    주로 useEffect(() => {...}, [from, to]) 등 필터변경 시 재조회 등의 패턴으로 사용된다.
+  */
+
+
+  if(err) return <div style={{padding:24}}>Error : {err}</div>;
+  if(!data) return <div style={{padding:24}}>Loading....</div>;
+
+  return (
+    <div style={{padding: 24}}>
+      <h2>Dashboard MVP</h2>
+      <div>Revenue: {data.revenue.toLocaleString()}원</div>
+      <div>AdSpend: {data.adSpend.toLocaleString()}원</div>
+      <div>Orders: {data.orders.toLocaleString()}건</div>
+      <div>ROAS: {data.roas.toFixed(2)}</div>{/* 소수점 2자리*/}
+
+      <hr style={{ margin: "16px 0" }} />
+
+      <RevenueChart rows={rows} />
+
+      <h3>TimeSerires (text)</h3>
+      {
+      rows.map((r) => (
+        <div key={`${r.date}-${r.channel}`}>
+          {r.date} / {r.channel} / rev={r.revenue.toLocaleString()} / spend={r.adSpend.toLocaleString()} / orders={r.orders} 
+        </div>
+      ))
+      }
+    </div>
+  )
+}
