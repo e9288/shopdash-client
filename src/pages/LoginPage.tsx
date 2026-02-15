@@ -1,8 +1,10 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { useAuth } from "../shared/auth/AuthProvider";
 import styles from "./LoginPage.module.css";
 
 export default function LoginPage() {
+    const navigate = useNavigate();
     const {login, loading, user} = useAuth();
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -90,6 +92,15 @@ export default function LoginPage() {
                         className={styles.submitButton}
                     >
                         {submitting ? "로그인 중..." : "로그인"}
+                    </button>
+
+                    <button
+                        type="button"
+                        onClick={() => navigate("/register")}
+                        className={styles.registerButton}
+                        disabled={submitting}
+                    >
+                        가맹점 가입
                     </button>
                 </form>
             </div>

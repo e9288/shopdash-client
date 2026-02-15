@@ -27,3 +27,15 @@ export async function logout() {
   if (!res.ok) throw new Error("logout failed");
   return res.json();
 }
+export async function register(email: string, password: string, storeName: string, phone?: string) {
+  const res = await apiFetch("/api/auth/register", {
+    method: "POST",
+    body: JSON.stringify({ email, password, storeName, phone }),
+  });
+
+  if (!res.ok) {
+    const error = await res.json();
+    throw new Error(error.message || "registration failed");
+  }
+  return res.json();
+}
