@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import { useAuth } from "../shared/auth/AuthProvider";
 import styles from "./LoginPage.module.css";
 
@@ -17,6 +18,22 @@ export default function LoginPage() {
                 <div className={styles.redirectingText}>Redirecting to dashboard...</div>
             </div>
         );
+    }
+
+    async function onDevFill() {
+        const devEmail = "storeA@dashboard.com";
+        const devPassword = "store123!";
+        setEmail(devEmail);
+        setPassword(devPassword);
+        setError(null);
+        setSubmitting(true);
+        try {
+            await login(devEmail, devPassword);
+        } catch (err: any) {
+            setError(err?.message ?? "로그인에 실패했습니다.");
+        } finally {
+            setSubmitting(false);
+        }
     }
 
     async function onSubmit(e: React.FormEvent) {
@@ -45,7 +62,7 @@ export default function LoginPage() {
             <div className={styles.card}>
                 <div className={styles.header}>
                     <div className={styles.logo}>📊</div>
-                    <h1 className={styles.title}>ShopDash</h1>
+                    <h1 className={styles.title} onDoubleClick={onDevFill} style={{ cursor: "default", userSelect: "none" }}>ShopDash</h1>
                     <p className={styles.subtitle}>쇼핑몰 통합 대시보드</p>
                 </div>
 
@@ -92,6 +109,11 @@ export default function LoginPage() {
                         {submitting ? "로그인 중..." : "로그인"}
                     </button>
                 </form>
+
+                <div className={styles.footer}>
+                    아직 계정이 없으신가요?{" "}
+                    <Link to="/register" className={styles.link}>회원가입</Link>
+                </div>
             </div>
         </div>
     );

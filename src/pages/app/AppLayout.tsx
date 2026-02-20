@@ -1,31 +1,32 @@
-import {Outlet} from "react-router-dom";
-import {useAuth} from "../../shared/auth/AuthProvider";
-/*
-    JS Library
-     - Outlet : /app 하위 라우트 레이아웃 내부 import 용
-     - useAuth : header에서 user 표시용
-*/
+import { Outlet } from "react-router-dom";
+import { useAuth } from "../../shared/auth/AuthProvider";
+import styles from "./AppLayout.module.css";
 
 export default function AppLayout() {
-    const {user, logout} = useAuth();
+    const { user, logout } = useAuth();
 
     return (
-        <div style={{ padding: 16 }}>
-            <header style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-                <div>
-                    <b>Shopdash</b>
-                    <div style={{ fontSize: 12, opacity: 0.7}}>
-                        {user?.userId} / {user?.role} {user?.storeId ? `(storeId: ${user.storeId})` : ""}
-                    </div>
+        <div className={styles.wrapper}>
+            <header className={styles.header}>
+                <div className={styles.logo}>
+                    <span className={styles.logoIcon}>🛍️</span>
+                    <span className={styles.logoText}>ShopDash</span>
                 </div>
 
-                <button onClick={logout}>Logout</button>
+                <div className={styles.headerRight}>
+                    <div className={styles.userInfo}>
+                        <div className={styles.userRole}>{user?.role}</div>
+                        <div className={styles.userId}>{user?.userId}</div>
+                    </div>
+                    <button className={styles.logoutBtn} onClick={logout}>
+                        로그아웃
+                    </button>
+                </div>
             </header>
 
-            <div style={{marginTop: 16}}>
+            <div className={styles.content}>
                 <Outlet />
-                {/* /app/master || /app/store 랜더링 */}
             </div>
         </div>
-    )
+    );
 }

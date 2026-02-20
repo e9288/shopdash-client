@@ -1,0 +1,325 @@
+/* StoreHome 대시보드 스타일 */
+
+.container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 8px 0 40px;
+}
+
+/* 헤더 */
+.pageHeader {
+    margin-bottom: 24px;
+}
+
+.title {
+    font-size: 24px;
+    font-weight: 700;
+    color: #1a202c;
+    margin: 0 0 4px 0;
+}
+
+.subtitle {
+    font-size: 14px;
+    color: #718096;
+    margin: 0;
+}
+
+/* 날짜 필터 */
+.filterBar {
+    display: flex;
+    align-items: flex-end;
+    gap: 16px;
+    flex-wrap: wrap;
+    background: #fff;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 16px 20px;
+    margin-bottom: 24px;
+}
+
+.dateInputs {
+    display: flex;
+    align-items: flex-end;
+    gap: 8px;
+}
+
+.dateGroup {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.dateLabel {
+    font-size: 12px;
+    font-weight: 600;
+    color: #718096;
+}
+
+.dateInput {
+    padding: 8px 12px;
+    font-size: 14px;
+    border: 2px solid #e2e8f0;
+    border-radius: 8px;
+    color: #2d3748;
+    font-family: inherit;
+    cursor: pointer;
+    transition: border-color 0.2s;
+}
+
+.dateInput:focus {
+    outline: none;
+    border-color: #667eea;
+}
+
+.dateSep {
+    font-size: 18px;
+    color: #a0aec0;
+    padding-bottom: 8px;
+}
+
+.presetButtons {
+    display: flex;
+    gap: 8px;
+    padding-bottom: 2px;
+}
+
+.preset {
+    padding: 8px 16px;
+    font-size: 13px;
+    font-weight: 500;
+    border: 2px solid #e2e8f0;
+    border-radius: 8px;
+    background: #fff;
+    color: #4a5568;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-family: inherit;
+}
+
+.preset:hover {
+    border-color: #667eea;
+    color: #667eea;
+}
+
+.presetActive {
+    border-color: #667eea;
+    background: #667eea;
+    color: #fff;
+}
+
+.presetActive:hover {
+    color: #fff;
+}
+
+/* 요약 카드 */
+.summaryGrid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    margin-bottom: 28px;
+}
+
+.summaryCard {
+    background: #fff;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.cardIcon {
+    font-size: 22px;
+}
+
+.cardLabel {
+    font-size: 13px;
+    color: #718096;
+    font-weight: 500;
+}
+
+.cardValue {
+    font-size: 22px;
+    font-weight: 700;
+    color: #1a202c;
+}
+
+.cardSub {
+    font-size: 12px;
+    color: #a0aec0;
+}
+
+.cardDanger .cardValue {
+    color: #e53e3e;
+}
+
+.cardSuccess .cardValue {
+    color: #38a169;
+}
+
+/* 테이블 섹션 */
+.tableSection {
+    background: #fff;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.tableTitle {
+    font-size: 16px;
+    font-weight: 700;
+    color: #2d3748;
+    margin: 0;
+    padding: 18px 24px;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.tableWrapper {
+    overflow-x: auto;
+}
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+}
+
+.table thead tr {
+    background: #f7fafc;
+}
+
+.table th {
+    padding: 12px 16px;
+    text-align: right;
+    font-weight: 600;
+    color: #4a5568;
+    font-size: 13px;
+    white-space: nowrap;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.table th:first-child {
+    text-align: left;
+}
+
+.table td {
+    padding: 14px 16px;
+    text-align: right;
+    color: #2d3748;
+    border-bottom: 1px solid #f0f4f8;
+}
+
+.table td:first-child {
+    text-align: left;
+}
+
+.table tbody tr:hover {
+    background: #f7fafc;
+}
+
+.table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.channelBadge {
+    display: inline-block;
+    padding: 4px 10px;
+    border-radius: 20px;
+    background: #eef2ff;
+    color: #4c51bf;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.canceledCell {
+    color: #e53e3e;
+}
+
+.completedCell {
+    color: #38a169;
+}
+
+.revenueCell {
+    font-weight: 600;
+}
+
+/* 합계 행 */
+.totalRow td {
+    background: #f7fafc;
+    font-weight: 700;
+    color: #1a202c;
+    border-top: 2px solid #e2e8f0;
+    border-bottom: none !important;
+}
+
+/* 상태 박스 (로딩/에러/빈값) */
+.stateBox {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 60px 24px;
+    gap: 12px;
+    color: #718096;
+}
+
+.spinner {
+    width: 36px;
+    height: 36px;
+    border: 3px solid #e2e8f0;
+    border-top-color: #667eea;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+.errorText {
+    color: #e53e3e;
+    margin: 0;
+}
+
+.emptyText {
+    margin: 0;
+    color: #a0aec0;
+}
+
+.retryBtn {
+    padding: 8px 20px;
+    background: #667eea;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    font-family: inherit;
+}
+
+.retryBtn:hover {
+    background: #5a67d8;
+}
+
+/* 반응형 */
+@media (max-width: 768px) {
+    .summaryGrid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .filterBar {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}
+
+@media (max-width: 480px) {
+    .summaryGrid {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .cardValue {
+        font-size: 18px;
+    }
+}

@@ -1,7 +1,8 @@
 import React, {createContext, useContext, useEffect, useMemo, useState} from "react";
 import {useLocation, useNavigate} from "react-router-dom";
 import type {AuthUser} from "../../api/auth";
-import {login as apiLogin, me as apiMe, logout as apiLogout} from "../../api/auth";
+import type { RegisterData } from "../../api/auth";
+import {login as apiLogin, me as apiMe, logout as apiLogout, register as apiRegister} from "../../api/auth";
 
 // AuthContext 에서 제공될 객체의 타입 선언
 // AuthContext 에서 제공된 객체에서 활용하게 될 AuthContext 내부 선언된 변수나 함수의 형태를 선언함
@@ -11,6 +12,7 @@ type AuthState = {
     login: (email: string, password: string) => Promise<void>;
     logout: () => Promise<void>;
     reloadMe: () => Promise<void>;
+    register: (data: RegisterData) => Promise<void>;
 };
 
 // <Provider></Provider> 내에서 사용될 context로 AuthContext를 선언한다.
@@ -51,6 +53,12 @@ export function AuthProvider({children} : {children: React.ReactNode}) {
         navigate("/login", {replace: true});
     }
 
+    async function register(data: RegisterData) {
+        await apiRegister(data);
+        await reloadMe();
+        navigate("/app/store", {replace: true});
+    }
+
     useEffect(() => {
         (async () => {
             try {
@@ -79,6 +87,7 @@ export function AuthProvider({children} : {children: React.ReactNode}) {
             login,
             logout,
             reloadMe,
+            register,
         }),
         [loading, user]
     );

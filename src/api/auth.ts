@@ -27,3 +27,26 @@ export async function logout() {
   if (!res.ok) throw new Error("logout failed");
   return res.json();
 }
+
+export type RegisterData = {
+    email: string;
+    password: string;
+    phone: string;
+    storeName: string;
+};
+
+export async function register(data: RegisterData) {
+    const res = await apiFetch("/api/auth/register", {
+        method: "POST",
+        body: JSON.stringify(data),
+    });
+
+    if (!res.ok) {
+        const body = await res.json().catch(() => ({}));
+        const err: any = new Error(body.message ?? "회원가입에 실패했습니다");
+        err.field = body.field ?? null;
+        throw err;
+    }
+
+    return res.json();
+}

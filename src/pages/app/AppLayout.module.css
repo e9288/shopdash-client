@@ -1,0 +1,95 @@
+.wrapper {
+    min-height: 100vh;
+    background: #f7f8fc;
+    display: flex;
+    flex-direction: column;
+}
+
+/* ── 헤더 ── */
+.header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    box-shadow: 0 2px 12px rgba(102, 126, 234, 0.3);
+    padding: 0 28px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+/* 로고 */
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.logoIcon {
+    font-size: 22px;
+    line-height: 1;
+}
+
+.logoText {
+    font-size: 20px;
+    font-weight: 800;
+    color: #ffffff;
+    letter-spacing: -0.5px;
+}
+
+/* 유저 정보 + 로그아웃 */
+.headerRight {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.userInfo {
+    text-align: right;
+}
+
+.userRole {
+    font-size: 11px;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.7);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.userId {
+    font-size: 13px;
+    color: rgba(255, 255, 255, 0.9);
+    margin-top: 1px;
+}
+
+/* 로그아웃 버튼 */
+.logoutBtn {
+    padding: 8px 18px;
+    font-size: 13px;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.9);
+    background: rgba(255, 255, 255, 0.15);
+    border: 1.5px solid rgba(255, 255, 255, 0.4);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s;
+    white-space: nowrap;
+}
+
+.logoutBtn:hover {
+    background: rgba(255, 255, 255, 0.25);
+    border-color: rgba(255, 255, 255, 0.7);
+    color: #ffffff;
+    transform: translateY(-1px);
+}
+
+.logoutBtn:active {
+    transform: translateY(0);
+}
+
+/* ── 콘텐츠 ── */
+.content {
+    flex: 1;
+    padding: 28px 28px;
+}
