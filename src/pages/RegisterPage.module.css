@@ -15,7 +15,11 @@
     box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
     padding: 48px 40px;
     width: 100%;
+<<<<<<< HEAD
     max-width: 420px;
+=======
+    max-width: 480px;
+>>>>>>> 425548392ee3a78421a975c2a0dd0b7546cc9bbc
     animation: slideUp 0.5s ease-out;
 }
 
@@ -32,7 +36,11 @@
 
 .header {
     text-align: center;
+<<<<<<< HEAD
     margin-bottom: 40px;
+=======
+    margin-bottom: 32px;
+>>>>>>> 425548392ee3a78421a975c2a0dd0b7546cc9bbc
 }
 
 .logo {
@@ -56,7 +64,11 @@
 .form {
     display: flex;
     flex-direction: column;
+<<<<<<< HEAD
     gap: 20px;
+=======
+    gap: 18px;
+>>>>>>> 425548392ee3a78421a975c2a0dd0b7546cc9bbc
 }
 
 .inputGroup {
@@ -72,7 +84,11 @@
 }
 
 .input {
+<<<<<<< HEAD
     padding: 14px 16px;
+=======
+    padding: 12px 16px;
+>>>>>>> 425548392ee3a78421a975c2a0dd0b7546cc9bbc
     font-size: 15px;
     border: 2px solid #e2e8f0;
     border-radius: 10px;
@@ -92,6 +108,7 @@
     color: #a0aec0;
 }
 
+<<<<<<< HEAD
 .inputError {
     border-color: #fc8181;
 }
@@ -107,6 +124,8 @@
     margin-top: 2px;
 }
 
+=======
+>>>>>>> 425548392ee3a78421a975c2a0dd0b7546cc9bbc
 .submitButton {
     padding: 14px 20px;
     font-size: 16px;
@@ -134,6 +153,31 @@
     cursor: not-allowed;
 }
 
+<<<<<<< HEAD
+=======
+.backButton {
+    padding: 12px 20px;
+    font-size: 14px;
+    font-weight: 500;
+    color: #667eea;
+    background: white;
+    border: 2px solid #e2e8f0;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.backButton:hover:not(:disabled) {
+    background: #f7fafc;
+    border-color: #cbd5e0;
+}
+
+.backButton:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+>>>>>>> 425548392ee3a78421a975c2a0dd0b7546cc9bbc
 .error {
     background: #fed7d7;
     color: #c53030;
@@ -150,6 +194,7 @@
     75% { transform: translateX(10px); }
 }
 
+<<<<<<< HEAD
 .footer {
     margin-top: 24px;
     text-align: center;
@@ -196,6 +241,8 @@
     font-weight: 500;
 }
 
+=======
+>>>>>>> 425548392ee3a78421a975c2a0dd0b7546cc9bbc
 /* 다크모드 대응 */
 @media (prefers-color-scheme: dark) {
     .card {
@@ -224,9 +271,22 @@
         color: #718096;
     }
 
+<<<<<<< HEAD
     .footer {
         color: #a0aec0;
     }
+=======
+    .backButton {
+        background: #1a202c;
+        border-color: #4a5568;
+        color: #a0aec0;
+    }
+
+    .backButton:hover:not(:disabled) {
+        background: #2d3748;
+        border-color: #718096;
+    }
+>>>>>>> 425548392ee3a78421a975c2a0dd0b7546cc9bbc
 }
 
 /* 모바일 반응형 */
